@@ -15,7 +15,7 @@ def get_stocks_info(rh):
         overall_data[item_type].append(val['type'])
         overall_data[avg_purchase_price].append(float(val['average_buy_price']))
         overall_data[curr_price].append(float(val['price']))
-        purchased_equity_val = str(float(val['average_buy_price']) * float(val['quantity']))
+        purchased_equity_val = float(float(val['average_buy_price']) * float(val['quantity']))
         overall_data[purchased_equity].append(purchased_equity_val)
         overall_data[curr_equity].append(float(val['equity']))
         overall_data[equity_change].append(float(val['equity_change']))

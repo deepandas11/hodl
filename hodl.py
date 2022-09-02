@@ -4,12 +4,14 @@ import os
 import pyotp
 import robin_stocks.robinhood as rh
 
-from src.export.csv_exporter import export_crypto, export_stocks
+from src.export.csv_exporter import export_crypto, export_stocks, export_profitability
 
 parser = argparse.ArgumentParser(description='arguments for hodl app')
 
-parser.add_argument('--type', type=str, help='specify the kind of holdings you want to snapshot', default='')
-parser.add_argument('--name', type=str, help='specify the filepath for saving the snapshots')
+parser.add_argument('--type', type=str,
+                    help='specify the kind of holdings you want to snapshot', default='general')
+parser.add_argument('--name', type=str,
+                    help='specify the filepath for saving the snapshots')
 
 
 if __name__ == '__main__':
@@ -33,12 +35,11 @@ if __name__ == '__main__':
         export_crypto(dir_name=dir_name, file_name=file_name, rh=rh)
     elif args.type == 'stocks':
         export_stocks(dir_name=dir_name, file_name=file_name, rh=rh)
-    elif args.type == 'both' or args.type == '':
-        export_crypto(dir_name=dir_name, file_name=file_name, rh=rh)
-        export_stocks(dir_name=dir_name, file_name=file_name, rh=rh)
+    elif args.type == 'general' or args.type == '':
+        export_profitability(dir_name=dir_name, file_name=file_name, rh=rh)
     else:
         print("Please specify valid type")
 
     rh.logout()
-    
+
     print('Done!')
